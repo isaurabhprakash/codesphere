@@ -8,6 +8,8 @@
 #ifndef recursion_h
 #define recursion_h
 
+class BinaryTreeNode;
+
 class RecursionRunner {
     
 public:
@@ -27,6 +29,9 @@ private:
     
     void printNTo1 (int n);
     void print1ToN (int n);
+    
+    void program_printHeightOfBinaryTree ();
+    int  heightOfBinaryTree (BinaryTreeNode * root);
 };
 
 #endif /* recursion_h */

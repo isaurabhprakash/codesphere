@@ -6,15 +6,23 @@
     //
 
 #include <iostream>
+#include <algorithm>
 #include "recursion.h"
+#include "binary_tree.h"
 
 void RecursionRunner::runPrograms() {
     
     std::cout<<"\nPrint numbers from 1 to N\n";
     printNTo1 (8);
+    std::cout<<"\n";
     
     std::cout<<"\nPrint numbers from N to 1\n";
     print1ToN (8);
+    std::cout<<"\n";
+    
+    std::cout<<"\nPrint heightof a binary tree\n";
+    program_printHeightOfBinaryTree ();
+    std::cout<<"\n";
 }
 
 void RecursionRunner::printNTo1(int n) {
@@ -35,5 +43,48 @@ void RecursionRunner::print1ToN(int n) {
     print1ToN(n - 1);
     
     std::cout<<n<<" ";
+}
+
+void RecursionRunner::program_printHeightOfBinaryTree () {
+    
+    BinaryTree binary_tree(1);
+    
+    // Add to left right of root
+    BinaryTreeNode * node_2 = binary_tree.AddLeft(binary_tree._root, 2);
+    BinaryTreeNode * node_3 = binary_tree.AddRight(binary_tree._root, 3);
+    
+    // Add to left right of 2
+    BinaryTreeNode * node_4 = binary_tree.AddLeft(node_2, 4);
+    BinaryTreeNode * node_5 = binary_tree.AddRight(node_2, 5);
+    
+    // Add to left right of 3
+    BinaryTreeNode * node_6 = binary_tree.AddLeft(node_3, 6);
+    BinaryTreeNode * node_7 = binary_tree.AddRight(node_3, 7);
+    
+    // Add to left right of 4
+    binary_tree.AddLeft(node_4, 8);
+    binary_tree.AddRight(node_4, 9);
+    
+    // Add to left right of 5
+    binary_tree.AddLeft(node_5, 10);
+    binary_tree.AddRight(node_5, 11);
+    
+    // Add to left right of 6
+    binary_tree.AddLeft(node_6, 12);
+    binary_tree.AddRight(node_6, 13);
+    
+    // Add to left right of 7
+    binary_tree.AddLeft(node_7, 14);
+    BinaryTreeNode * node_15 = binary_tree.AddRight(node_7, 15);
+    
+    std::cout<<heightOfBinaryTree (binary_tree._root);
+}
+
+int RecursionRunner::heightOfBinaryTree(BinaryTreeNode *root) {
+    
+    if (root == nullptr)
+        return 0;
+    
+    return 1 + std::max(heightOfBinaryTree(root->_left), heightOfBinaryTree(root->_right));
 }
 
