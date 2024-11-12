@@ -23,6 +23,10 @@ void RecursionRunner::runPrograms() {
     std::cout<<"\nPrint heightof a binary tree\n";
     program_printHeightOfBinaryTree ();
     std::cout<<"\n";
+    
+    std::cout<<"\nSort array using recursion\n";
+    program_sortArray ();
+    std::cout<<"\n";
 }
 
 void RecursionRunner::printNTo1(int n) {
@@ -75,7 +79,7 @@ void RecursionRunner::program_printHeightOfBinaryTree () {
     
     // Add to left right of 7
     binary_tree.AddLeft(node_7, 14);
-    BinaryTreeNode * node_15 = binary_tree.AddRight(node_7, 15);
+    binary_tree.AddRight(node_7, 15);
     
     std::cout<<heightOfBinaryTree (binary_tree._root);
 }
@@ -88,3 +92,40 @@ int RecursionRunner::heightOfBinaryTree(BinaryTreeNode *root) {
     return 1 + std::max(heightOfBinaryTree(root->_left), heightOfBinaryTree(root->_right));
 }
 
+void RecursionRunner::program_sortArray ()
+{
+    std::vector<int>    array{2,3,7,6,4,5,9};
+    
+    std::cout<<"Before sorting : ";
+    for (auto num : array)
+        std::cout<<num<<" ";
+    
+    sortArray(array, 0);
+    
+    std::cout<<"\nAfter sorting : ";
+    for (auto num : array)
+        std::cout<<num<<" ";
+}
+
+void RecursionRunner::sortArray (std::vector<int> & array, int index)
+{
+    if (index == (array.size () - 1))
+        return;
+    
+    // Sort the array after current index
+    sortArray (array, index + 1);
+    
+    // Insert the element at current index at correct position in the array
+    insertElem (array, index);
+}
+
+void RecursionRunner::insertElem (std::vector<int> & array, int index)
+{
+    if (index == (array.size () - 1))
+        return;
+
+    if (array[index] > array[index + 1])
+        std::swap (array[index], array[index+1]);
+    
+    insertElem (array, index + 1);
+}

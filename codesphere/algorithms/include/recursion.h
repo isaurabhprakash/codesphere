@@ -32,6 +32,10 @@ private:
     
     void program_printHeightOfBinaryTree ();
     int  heightOfBinaryTree (BinaryTreeNode * root);
+    
+    void program_sortArray ();
+    void sortArray (std::vector<int> & array, int index);
+    void insertElem (std::vector<int> & array, int index);
 };
 
 #endif /* recursion_h */
