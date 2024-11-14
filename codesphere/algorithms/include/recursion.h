@@ -35,7 +35,12 @@ private:
     
     void program_sortArray ();
     void sortArray (std::vector<int> & array, int index);
-    void insertElem (std::vector<int> & array, int index);
+    void insertIntoArray (std::vector<int> & array, int index);
+    
+    void program_sortStack ();
+    void sortStack (std::stack<int> & s);
+    void insertIntoStack (int ele, std::stack<int> & s);
+
 };
 
 #endif /* recursion_h */

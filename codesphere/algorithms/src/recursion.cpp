@@ -27,6 +27,10 @@ void RecursionRunner::runPrograms() {
     std::cout<<"\nSort array using recursion\n";
     program_sortArray ();
     std::cout<<"\n";
+    
+    std::cout<<"\nSort stack using recursion\n";
+    program_sortStack ();
+    std::cout<<"\n";
 }
 
 void RecursionRunner::printNTo1(int n) {
@@ -116,10 +120,10 @@ void RecursionRunner::sortArray (std::vector<int> & array, int index)
     sortArray (array, index + 1);
     
     // Insert the element at current index at correct position in the array
-    insertElem (array, index);
+    insertIntoArray (array, index);
 }
 
-void RecursionRunner::insertElem (std::vector<int> & array, int index)
+void RecursionRunner::insertIntoArray (std::vector<int> & array, int index)
 {
     if (index == (array.size () - 1))
         return;
@@ -127,5 +131,65 @@ void RecursionRunner::insertElem (std::vector<int> & array, int index)
     if (array[index] > array[index + 1])
         std::swap (array[index], array[index+1]);
     
-    insertElem (array, index + 1);
+    insertIntoArray (array, index + 1);
+}
+
+void RecursionRunner::program_sortStack ()
+{
+    std::stack<int> s;
+    
+    s.push(2);
+    s.push(3);
+    s.push(7);
+    s.push(6);
+    s.push(4);
+    s.push(5);
+    s.push(9);
+    
+    std::cout<<"Before sorting : ";
+    std::stack<int> temp = s;
+    
+    while (!temp.empty ()) {
+        std::cout<<temp.top ()<<" ";
+        temp.pop ();
+    }
+        
+    
+    sortStack (s);
+    
+    std::cout<<"\nAfter sorting : ";
+    while (!s.empty ()) {
+        std::cout<<s.top () <<" ";
+        s.pop();
+    }
+}
+
+void RecursionRunner::sortStack(std::stack<int> & s)
+{
+    if (s.empty ())
+        return;
+    
+    // Remove the topmost element
+    int top = s.top ();
+    s.pop ();
+    
+    // Sort the remaining stack
+    sortStack (s);
+    
+    // Insert the top element at curect position in the stack;
+    insertIntoStack (top, s);
+}
+
+void RecursionRunner::insertIntoStack (int ele, std::stack<int> & s)
+{
+    if (s.empty () || (ele > s.top ())) {
+        s.push (ele);
+        return;
+    }
+    
+    int top = s.top ();
+    
+    s.pop ();
+    insertIntoStack(ele, s);
+    s.push (top);
 }
