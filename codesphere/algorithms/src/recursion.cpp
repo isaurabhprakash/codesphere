@@ -12,6 +12,7 @@
 
 void RecursionRunner::runPrograms() {
     
+    std::cout<<"********** Running recursion programs **********\n";
     std::cout<<"\nPrint numbers from 1 to N\n";
     printNTo1 (8);
     std::cout<<"\n";
@@ -20,16 +21,20 @@ void RecursionRunner::runPrograms() {
     print1ToN (8);
     std::cout<<"\n";
     
-    std::cout<<"\nPrint heightof a binary tree\n";
+    std::cout<<"\nPrint the height of a binary tree\n";
     program_printHeightOfBinaryTree ();
     std::cout<<"\n";
     
-    std::cout<<"\nSort array using recursion\n";
+    std::cout<<"\nSort an array\n";
     program_sortArray ();
     std::cout<<"\n";
     
-    std::cout<<"\nSort stack using recursion\n";
+    std::cout<<"\nSort a stack\n";
     program_sortStack ();
+    std::cout<<"\n";
+    
+    std::cout<<"\nDelete middle element of a stack\n";
+    program_deleteMiddleStackElement ();
     std::cout<<"\n";
 }
 
@@ -192,4 +197,51 @@ void RecursionRunner::insertIntoStack (int ele, std::stack<int> & s)
     s.pop ();
     insertIntoStack(ele, s);
     s.push (top);
+}
+
+void RecursionRunner::program_deleteMiddleStackElement ()
+{
+    std::stack<int> s;
+    
+    s.push (1);
+    s.push (2);
+    s.push (3);
+    s.push (4);
+    s.push (5);
+    
+    std::stack<int> temp = s;
+    
+    std::cout<<"Original Stack before deleting\n";
+    while (!temp.empty ()) {
+        
+        int top = temp.top ();
+        temp.pop ();
+        std::cout<<top<<" ";
+    }
+    
+    std::cout<<"\n";
+    
+    deleteKthStackElement (s, ceil (s.size ()/2.0));
+    
+    std::cout<<"Stack after deleting middle element\n";
+    while (!s.empty ()) {
+        
+        int top = s.top ();
+        s.pop ();
+        std::cout<<top<<" ";
+    }
+}
+
+void RecursionRunner::deleteKthStackElement(std::stack<int> & s, unsigned int k)
+{
+    if (s.size () == k) {
+        
+        s.pop ();
+        return;
+    }
+
+    int top = s.top ();
+    s.pop ();
+    deleteKthStackElement (s, k);
+    s.push(top);
 }

@@ -40,6 +40,9 @@ private:
     void program_sortStack ();
     void sortStack (std::stack<int> & s);
     void insertIntoStack (int ele, std::stack<int> & s);
+    
+    void program_deleteMiddleStackElement ();
+    void deleteKthStackElement (std::stack<int> & s, unsigned int k);
 
 };
 
