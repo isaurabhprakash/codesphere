@@ -36,6 +36,10 @@ void RecursionRunner::runPrograms() {
     std::cout<<"\nDelete middle element of a stack\n";
     program_deleteMiddleStackElement ();
     std::cout<<"\n";
+    
+    std::cout<<"\nReverse a stack\n";
+    program_reverseStack ();
+    std::cout<<"\n";
 }
 
 void RecursionRunner::printNTo1(int n) {
@@ -154,19 +158,12 @@ void RecursionRunner::program_sortStack ()
     std::cout<<"Before sorting : ";
     std::stack<int> temp = s;
     
-    while (!temp.empty ()) {
-        std::cout<<temp.top ()<<" ";
-        temp.pop ();
-    }
-        
+    printStack(s);
     
     sortStack (s);
     
     std::cout<<"\nAfter sorting : ";
-    while (!s.empty ()) {
-        std::cout<<s.top () <<" ";
-        s.pop();
-    }
+    printStack(s);
 }
 
 void RecursionRunner::sortStack(std::stack<int> & s)
@@ -209,30 +206,17 @@ void RecursionRunner::program_deleteMiddleStackElement ()
     s.push (4);
     s.push (5);
     
-    std::stack<int> temp = s;
     
     std::cout<<"Original Stack before deleting\n";
-    while (!temp.empty ()) {
-        
-        int top = temp.top ();
-        temp.pop ();
-        std::cout<<top<<" ";
-    }
-    
-    std::cout<<"\n";
+    printStack (s);
     
     deleteKthStackElement (s, ceil (s.size ()/2.0));
     
     std::cout<<"Stack after deleting middle element\n";
-    while (!s.empty ()) {
-        
-        int top = s.top ();
-        s.pop ();
-        std::cout<<top<<" ";
-    }
+    printStack(s);
 }
 
-void RecursionRunner::deleteKthStackElement(std::stack<int> & s, unsigned int k)
+void RecursionRunner::deleteKthStackElement (std::stack<int> & s, unsigned int k)
 {
     if (s.size () == k) {
         
@@ -244,4 +228,60 @@ void RecursionRunner::deleteKthStackElement(std::stack<int> & s, unsigned int k)
     s.pop ();
     deleteKthStackElement (s, k);
     s.push(top);
+}
+
+void RecursionRunner::program_reverseStack ()
+{
+    std::stack<int> s;
+    
+    s.push (1);
+    s.push (2);
+    s.push (3);
+    s.push (4);
+    s.push (5);
+    
+    std::cout<<"Original stack\n";
+    printStack(s);
+    
+    reverseStack (s);
+    
+    std::cout<<"Reversed a stack\n";
+    printStack(s);
+}
+
+void RecursionRunner::reverseStack (std::stack<int> &s)
+{
+    if (s.empty())
+        return;
+    
+    int top = s.top ();
+    s.pop ();
+    reverseStack(s);
+    insertAtStackBeginning (s, top);
+}
+
+void RecursionRunner::insertAtStackBeginning (std::stack<int> &s, int ele)
+{
+    if (s.empty()) {
+        s.push (ele);
+        return;
+    }
+
+    int top = s.top ();
+    s.pop ();
+    
+    insertAtStackBeginning (s, ele);
+    s.push (top);
+}
+
+void RecursionRunner::printStack (std::stack<int> s)
+{
+    while (!s.empty ()) {
+        
+        int top = s.top ();
+        s.pop ();
+        std::cout<<top<<" ";
+    }
+    
+    std::cout<<"\n";
 }

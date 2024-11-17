@@ -43,6 +43,13 @@ private:
     
     void program_deleteMiddleStackElement ();
     void deleteKthStackElement (std::stack<int> & s, unsigned int k);
+    
+    void program_reverseStack ();
+    void reverseStack (std::stack<int> & s);
+    void insertAtStackBeginning (std::stack<int> & s, int ele);
+    
+    // helper functions
+    void printStack (std::stack<int> s);
 
 };
 
