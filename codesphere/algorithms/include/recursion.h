@@ -48,6 +48,9 @@ private:
     void reverseStack (std::stack<int> & s);
     void insertAtStackBeginning (std::stack<int> & s, int ele);
     
+    void program_towerOfHanoi (int numberOfDisks);
+    void towerOfHanoi (int numberOfDisks, char src, char dst, char aux);
+    
     // helper functions
     void printStack (std::stack<int> s);
 

@@ -40,6 +40,10 @@ void RecursionRunner::runPrograms() {
     std::cout<<"\nReverse a stack\n";
     program_reverseStack ();
     std::cout<<"\n";
+    
+    std::cout<<"\nTower of Hanoi\n";
+    program_towerOfHanoi (4);
+    std::cout<<"\n";
 }
 
 void RecursionRunner::printNTo1(int n) {
@@ -272,6 +276,27 @@ void RecursionRunner::insertAtStackBeginning (std::stack<int> &s, int ele)
     
     insertAtStackBeginning (s, ele);
     s.push (top);
+}
+
+void RecursionRunner::towerOfHanoi (int numberOfDisks, char src, char dst, char aux)
+{
+    if (numberOfDisks == 1) {
+        std::cout<<"Moving from "<<src<<" to "<<dst<<"\n";
+        return;
+    }
+    
+    towerOfHanoi(numberOfDisks - 1, src, aux, dst);
+    std::cout<<"Moving from "<<src<<" to "<<dst<<"\n";
+    towerOfHanoi(numberOfDisks - 1, aux, dst, src);
+}
+
+void RecursionRunner::program_towerOfHanoi (int numberOfDisks)
+{
+    std::cout<<"\tNumber of disks : "<<numberOfDisks<<"\n";
+    std::cout<<"\tSource          : A"<<"\n";
+    std::cout<<"\tDestination     : B"<<"\n";
+    std::cout<<"\tAuxiliary       : C"<<"\n";
+    towerOfHanoi (numberOfDisks, 'A','B', 'C');
 }
 
 void RecursionRunner::printStack (std::stack<int> s)
