@@ -44,6 +44,10 @@ void RecursionRunner::runPrograms() {
     std::cout<<"\nTower of Hanoi\n";
     program_towerOfHanoi (4);
     std::cout<<"\n";
+    
+    std::cout<<"\nFind all subsets\n";
+    program_findAllSubsets ("abcd");
+    std::cout<<"\n";
 }
 
 void RecursionRunner::printNTo1(int n) {
@@ -297,6 +301,37 @@ void RecursionRunner::program_towerOfHanoi (int numberOfDisks)
     std::cout<<"\tDestination     : B"<<"\n";
     std::cout<<"\tAuxiliary       : C"<<"\n";
     towerOfHanoi (numberOfDisks, 'A','B', 'C');
+}
+
+void RecursionRunner::program_findAllSubsets (std::string str)
+{
+    std::vector<std::string>   all_subsets;
+    std::string    cur_subset;
+    
+    findAllSubsets (str, 0, cur_subset, all_subsets);
+    
+    for (const auto & str : all_subsets) {
+
+        std::cout << "{ "<<str<<" }\n";
+    }
+}
+
+void RecursionRunner::findAllSubsets (std::string str, int curIdx, std::string & currentSubset, std::vector<std::string> & allSubsets)
+{
+    // Base Condition
+    if (curIdx >= str.size ()) {
+        
+        allSubsets.push_back(currentSubset);
+        return;
+    }
+    
+    // Include the current character in the subset and find all the subsets from the remaining characters
+    currentSubset.push_back(str[curIdx]);
+    findAllSubsets(str, curIdx + 1, currentSubset, allSubsets);
+    
+    // Exclude the current character in the subset and find all the subsets from the remaining characters
+    currentSubset.pop_back ();
+    findAllSubsets(str, curIdx + 1, currentSubset, allSubsets);
 }
 
 void RecursionRunner::printStack (std::stack<int> s)

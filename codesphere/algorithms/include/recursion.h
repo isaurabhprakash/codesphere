@@ -51,6 +51,9 @@ private:
     void program_towerOfHanoi (int numberOfDisks);
     void towerOfHanoi (int numberOfDisks, char src, char dst, char aux);
     
+    void program_findAllSubsets (std::string str);
+    void findAllSubsets (std::string str, int curIdx, std::string & currentSubset, std::vector<std::string> & allSubsets);
+    
     // helper functions
     void printStack (std::stack<int> s);
 
