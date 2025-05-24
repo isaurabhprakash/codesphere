@@ -1,15 +1,20 @@
 #include <iostream>
 #include <vector>
 
-long long fib(int n, std::vector<long long> &fibArr)
+long long fib(int n)
 {
-    if (n == 0 || n == 1)
-        return n;
+    std::vector<long long> fibArr(n + 1, -1);
 
-    if (fibArr[n] != -1)
+    fibArr[0] = 0;
+    fibArr[1] = 1;
+
+    if (n <= 1)
         return fibArr[n];
 
-    fibArr[n] = fib(n - 1, fibArr) + fib(n - 2, fibArr);
+    for (int i = 2; i <= n; ++i)
+    {
+        fibArr[i] = fibArr[i - 1] + fibArr[i - 2];
+    }
 
     return fibArr[n];
 }
@@ -28,7 +33,6 @@ int main()
         if (n < 0)
             return 0;
 
-        std::vector<long long> fibArr(n + 1, -1);
-        std::cout << "fibn(n) : " << fib(n, fibArr) << "\n";
+        std::cout << "fibn(n) : " << fib(n) << "\n";
     }
 }
